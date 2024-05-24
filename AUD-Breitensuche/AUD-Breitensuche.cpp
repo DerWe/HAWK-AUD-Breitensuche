@@ -1,20 +1,42 @@
-// AUD-Breitensuche.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
-//
-
 #include <iostream>
+#include <vector>
+#include <queue>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using namespace std;
+
+// Beispiel: Adjazenzliste für einen ungerichteten Graphen
+vector<vector<int>> graph = {
+    {1, 2},     // Knoten 0 ist mit Knoten 1 und 2 verbunden
+    {0, 2, 3},  // Knoten 1 ist mit Knoten 0, 2 und 3 verbunden
+    {0, 1, 3},  // ...
+    {1, 2}
+};
+
+void bfs(int start) {
+    vector<bool> visited(graph.size(), false);
+    queue<int> q;
+
+    q.push(start);
+    visited[start] = true;
+
+    while (!q.empty()) {
+        int current = q.front();
+        q.pop();
+
+        cout << "Besuche Knoten " << current << endl;
+
+        for (int neighbor : graph[current]) {
+            if (!visited[neighbor]) {
+                q.push(neighbor);
+                visited[neighbor] = true;
+            }
+        }
+
+    }
 }
 
-// Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"
-// Programm debuggen: F5 oder "Debuggen" > Menü "Debuggen starten"
-
-// Tipps für den Einstieg: 
-//   1. Verwenden Sie das Projektmappen-Explorer-Fenster zum Hinzufügen/Verwalten von Dateien.
-//   2. Verwenden Sie das Team Explorer-Fenster zum Herstellen einer Verbindung mit der Quellcodeverwaltung.
-//   3. Verwenden Sie das Ausgabefenster, um die Buildausgabe und andere Nachrichten anzuzeigen.
-//   4. Verwenden Sie das Fenster "Fehlerliste", um Fehler anzuzeigen.
-//   5. Wechseln Sie zu "Projekt" > "Neues Element hinzufügen", um neue Codedateien zu erstellen, bzw. zu "Projekt" > "Vorhandenes Element hinzufügen", um dem Projekt vorhandene Codedateien hinzuzufügen.
-//   6. Um dieses Projekt später erneut zu öffnen, wechseln Sie zu "Datei" > "Öffnen" > "Projekt", und wählen Sie die SLN-Datei aus.
+int main() {
+    int startNode = 0; // Startknoten auswählen
+    bfs(startNode);
+    return 0;
+}

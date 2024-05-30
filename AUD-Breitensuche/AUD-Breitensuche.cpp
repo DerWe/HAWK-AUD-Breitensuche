@@ -48,8 +48,9 @@ int main() {
         {4}         // Knoten 5
     };
 
-    int startknoten = 0;// Startknoten auswählen
-    cin >> startknoten;
+    int startknoten = 0;// Startknoten (default)
+    cout << "Bitte Nummer des Startknoten eingeben:";
+    cin  >> startknoten;
     bfs(startknoten);
 
     return 0;

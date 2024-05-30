@@ -4,39 +4,52 @@
 
 using namespace std;
 
-// Beispiel: Adjazenzliste für einen ungerichteten Graphen
-vector<vector<int>> graph = {
-    {1, 2},     // Knoten 0 ist mit Knoten 1 und 2 verbunden
-    {0, 2, 3},  // Knoten 1 ist mit Knoten 0, 2 und 3 verbunden
-    {0, 1, 3},  // ...
-    {1, 2}
-};
+// Graph als Adjazenzliste
+vector<vector<int>> graph;
 
+// Breitensuche
 void bfs(int start) {
     vector<bool> visited(graph.size(), false);
+    vector<int> distance(graph.size(), -1);
     queue<int> q;
 
     q.push(start);
     visited[start] = true;
+    distance[start] = 0;
 
     while (!q.empty()) {
         int current = q.front();
         q.pop();
 
-        cout << "Besuche Knoten " << current << endl;
-
         for (int neighbor : graph[current]) {
             if (!visited[neighbor]) {
                 q.push(neighbor);
                 visited[neighbor] = true;
+                distance[neighbor] = distance[current] + 1;
             }
         }
+    }
 
+    // Ausgabe der Distanzen
+    cout << "Kürzeste Wege vom Startknoten " << start << ":\n";
+    for (int i = 0; i < graph.size(); ++i) {
+        cout << "Knoten " << i << ": " << distance[i] << "\n";
     }
 }
 
 int main() {
-    int startNode = 0; // Startknoten auswählen
-    bfs(startNode);
+    // Beispielgraph (Adjazenzliste)
+    graph = {
+        {1, 2},     // Knoten 0
+        {0, 2, 3},  // Knoten 1
+        {0, 1, 4},  // Knoten 2
+        {1},        // Knoten 3
+        {2, 5},     // Knoten 4
+        {4}         // Knoten 5
+    };
+
+    int startknoten = 0; // Startknoten auswählen
+    bfs(startknoten);
+
     return 0;
 }

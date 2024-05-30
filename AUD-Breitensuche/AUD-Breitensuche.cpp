@@ -31,7 +31,7 @@ void bfs(int start) {
     }
 
     // Ausgabe der Distanzen
-    cout << "Kürzeste Wege vom Startknoten " << start << ":\n";
+    cout << "Kuerzeste Wege vom Startknoten " << start << ":\n";
     for (int i = 0; i < graph.size(); ++i) {
         cout << "Knoten " << i << ": " << distance[i] << "\n";
     }
@@ -48,7 +48,8 @@ int main() {
         {4}         // Knoten 5
     };
 
-    int startknoten = 0; // Startknoten auswählen
+    int startknoten = 0;// Startknoten auswählen
+    cin >> startknoten;
     bfs(startknoten);
 
     return 0;
